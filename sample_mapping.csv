@@ -1,0 +1,8 @@
+s,p,o
+cco.Person_1,RDF.type,cco.Person
+cco.Person_1,cco.designated_by,cco.NominalMeasurementInformationContentEntity_1_
+cco.NominalMeasurementInformationContentEntity_1_,RDF.type,cco.NominalMeasurementInformationContentEntity
+cco.NominalMeasurementInformationContentEntity_1_,cco.has_text_value,datapoint/string/Name
+cco.Person_1_,cco.agent_in,cco.IntentionalAct_1_
+cco.IntentionalAct_1_,RDFS.label,datapoint/string/Activity
+cco.IntentionalAct_1_,RDF.type,cco.IntentionalAct
