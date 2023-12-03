@@ -1,5 +1,5 @@
 # CSV_to_RDF_Instance_tool
-A tool for turning csv into rdf with complex mappings.
+A tool for turning csv into rdf with complex mappings. This tool depends on RDFLib, Pandas, and was built on a Windows machine. This tool works best when used in a self-contained folder.
 
 # Usage
 The tool has two functions, the first takes a mapping file and transforms it into RDFLib syntax, and the second maps the csv data to rdf triples.
