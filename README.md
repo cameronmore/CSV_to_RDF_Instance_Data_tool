@@ -30,9 +30,21 @@ Mark,Thinking
 Sally,Working
 ```
 
+```mermaid
+flowchart TD;
+
+C{Person};
+C -->|designated by| G{Nominal ICE};
+C -->|agent in| D{Activity};
+D -->|label| E(Datapoint: Activity);
+G -->|has text value| H(Datapoint: Name);
+```
+
 This is a mapping that takes two datapoints, one which is the `rdfs:label` for the set of people, and another which is the `rdfs:label` for the activities those people are `ex.agent_in`.
 
 To connect a triple to a column in a csv, the following syntax is used:
 `datapoint/datatype/column` where `datatype` is a valid `xsd:datatype` and `column` is the name of a column in the csv.
 
 The function `process_mapping` will produce a file called `post_processed_mapping.txt`. This is a set of triples in the RDFLib syntax that need to be manually placed in the second function, `map_data()`. Once this function is changed, it may be called by passing in the instance data csv ( `map_data('your_data.csv`).
+
+
