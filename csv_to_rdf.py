@@ -108,6 +108,9 @@ def process_mapping(mapping_file):
 
 
 def map_data(instance_data):
+    """
+    This function must be updated with the mapping triples produced by the function process_mapping()
+    """
     with open(instance_data, 'r') as f:
         reader = csv.DictReader(f)
         for row in reader:
