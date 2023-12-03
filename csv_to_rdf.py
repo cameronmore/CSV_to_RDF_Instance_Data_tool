@@ -138,3 +138,10 @@ process_mapping('sample_mapping.csv')
 
 #Call the second function
 map_data('sample_data.csv')
+
+
+"""
+TODO
+Try adding an update_mapping() function that updates the mapping in the map_data() file, maybe with regex and add some special delimeter in the map_data() function
+
+"""
