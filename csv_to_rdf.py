@@ -33,8 +33,8 @@ def process_mapping(mapping_file):
     """
 
     
-    #Create a temporary working file to read and write to
-    final_file = 'temporary'
+    #Create a temporary_mapping working file to read and write to
+    final_file = 'temporary_mapping'
     with open(os.path.join(os.getcwd(), final_file), 'w') as f:
         f.write('')
 
@@ -85,13 +85,13 @@ def process_mapping(mapping_file):
     with open(os.path.join(os.getcwd(), filename), 'w') as f:
         f.write('')
 
-    #Migrate working csv file to final mapped txt file, delete temporary working file
+    #Migrate working csv file to final mapped txt file, delete temporary_mapping working file
     with open(final_file, newline='') as f_input, open('post_processed_mapping.txt', 'w') as f_output:
         csv_input = csv.reader(f_input)
         for row in csv_input:
             f_output.write(','.join(row) + '\n')
             
-    os.remove('temporary')
+    os.remove('temporary_mapping')
             
 
     #Add g.add(()) to every line
