@@ -70,6 +70,12 @@ def process_mapping(mapping_file):
             new_value = 'Literal(row[' + "'" + my_list[2] + "'" + '], datatype=XSD.' + my_list[1] +')'
             row[2]=new_value
 
+        if 'datapoint' in row[0]:
+            my_list = row[0].split('/')
+            new_value = 'Literal(row[' + "'" + my_list[2] + "'" + '], datatype=XSD.' + my_list[1] +')'
+            row[0]=new_value
+
+
     df.to_csv(final_file, index=False, header=False)
 
 
