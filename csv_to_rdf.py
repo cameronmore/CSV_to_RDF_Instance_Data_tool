@@ -65,15 +65,15 @@ def process_mapping(mapping_file):
     df = pd.read_csv(final_file)
 
     for index, row in df.iterrows():
-        if 'datapoint' in row[2]:
-            my_list = row[2].split('/')
+        if 'datapoint' in row.iloc[2]:
+            my_list = row.iloc[2].split('/')
             new_value = 'Literal(row[' + "'" + my_list[2] + "'" + '], datatype=XSD.' + my_list[1] +')'
-            row[2]=new_value
+            row.iloc[2]=new_value
 
-        if 'datapoint' in row[0]:
-            my_list = row[0].split('/')
+        if 'datapoint' in row.iloc[0]:
+            my_list = row.iloc[0].split('/')
             new_value = 'Literal(row[' + "'" + my_list[2] + "'" + '], datatype=XSD.' + my_list[1] +')'
-            row[0]=new_value
+            row.iloc[0]=new_value
 
 
     df.to_csv(final_file, index=False, header=False)
@@ -130,6 +130,7 @@ def map_data(instance_data):
             Paste the triples from the 'post_processed_mapping' here!!!
             """
             
+            
 
 
     # Serialize graph to RDF/XML format
@@ -138,12 +139,12 @@ def map_data(instance_data):
 
 
 #Usage:
-process_mapping('sample_mapping.csv')
+#process_mapping('sample_mapping.csv')
 
 #Then take the results, paste them above
 
 #Call the second function
-map_data('sample_data.csv')
+#map_data('sample_data.csv')
 
 
 """
