@@ -19,7 +19,12 @@ g.bind('owl',owl)
 
 def total_mapping_and_generate_data(mapping_file,data_file,uuid_or_hex):
     """
-    Iterate through the 
+    Takes a mapping CSV file and data CSV file as input. \n
+    Mapping syntax is a simpler version of regular RDFLib syntax. \n
+    If uuid_or_hex is False, then the generated triples are generated without hyphens (as hexidecibles, not uuids). If True or None, then regular random uuids will be used. \n
+    Native Python modules csv, re, and uuid must be imported. \n
+    Dependencies: RDFLib, XSD, and RDF must be imported, a grah must be parsed in RDFLib, the function adds triples to this graph, then serializes and prints the generated data to the terminal. \n
+    
         
     """
     with open(data_file, 'r') as f:
@@ -37,15 +42,9 @@ def total_mapping_and_generate_data(mapping_file,data_file,uuid_or_hex):
                         uuid_str = uuid.uuid4().hex
                         
                     if mapping_row['p'] == 'RDF.type' :
-                        g.add((URIRef(mapping_row['s']+uuid_str),RDF.type,mapping_row['o']))
+                        g.add((URIRef(mapping_row['s']+uuid_str),RDF.type,URIRef(mapping_row['o'])))
                         g.add((URIRef(mapping_row['s']+uuid_str),RDF.type,owl.NamedIdividual))
-
-                        
-                        #Running into an issue above,
-                            #The hard-coded g.add statements need to reference the proper locations in the DATA file, not 's' 'p' 'o' like the lines do above currently
-                            #Am I wrong about that?
-                            #I am wrong about that in this case, the only place it matters is hen we get to the literals!!                
-                
+               
                     if mapping_row['p'] != 'RDF.type' :
                         if 'datapoint' in mapping_row['o']:
                             split_datapoint_list = mapping_row['o'].split('/')
@@ -71,16 +70,15 @@ def total_mapping_and_generate_data(mapping_file,data_file,uuid_or_hex):
                                 #Either a row in the mapping has datapoint in it or not.
                                 #Either a row in the mapping has rdf:type or not.
                                 #These two options are mutually exclusive
+                                
                         else:
-                            g.add(( URIRef(mapping_row['s']+uuid_str),mapping_row['p'],URIRef(mapping_row['o']+uuid_str) ))
+                            g.add(( URIRef(mapping_row['s']+uuid_str),URIRef(mapping_row['p']),URIRef(mapping_row['o']+uuid_str) ))
         print(g.serialize(format="turtle"))
 
 
-total_mapping_and_generate_data('sample_mapping.csv','sample_data.csv',False)
+total_mapping_and_generate_data('sample_mapping.csv','sample_data.csv',True)
 
 #Currently gettinh an error because the mapping file is a csv, and each value of each column is a string, not an RDFLib object
     #Even though cco.Person is an RDF:Lib object in python, the function is reading it as a string in a csv... which it is...
 #To change this, the mapping could be rewritten in as a python file or written AS a csv but with a .py extension
-    #I imagine this might cause other problems?
-#Or, I change the beginning of my function to read the csv AS a python file?
-    #Not sure how well that would work...
+#Fixed this problem by just wrapping all the items retrieved from the mapping file with URIRef()
