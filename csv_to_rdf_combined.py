@@ -42,6 +42,12 @@ def total_mapping_and_generate_data(mapping_file,data_file,uuid_or_hex):
 
             with open(mapping_file, 'r') as input_file:
                 mapping_reader = csv.DictReader(input_file)
+                
+                #Impliment a find-and-replace loop here that replaces prefixes in the triples wit the full IRI prefix
+                    #Use *args or *kwargs to let user put their own prefixes in, but hard code a bunch of them like obo and cco especially
+                    #for cco in mapping_file
+                        #replace with http://ontologyrepository...
+
 
                 for mapping_row in mapping_reader:
                     
