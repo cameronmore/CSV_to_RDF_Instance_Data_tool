@@ -23,13 +23,13 @@ g.bind('owl',owl)
 
 def process_mapping(mapping_file):
     """
-    This function takes a mapping file and generates a new file called post_processed_mapping.txt
-    The lines from this fie should be pasted into the body of the function map_data()
-    This function takes a very specific syntax with the following criteria:
-        The mapping file must be a .csv
-        The first line must be 's,p,o'
-        Every triple in the mapping must be explicitly asserted, with type assertions being done with RDF.type
-    The triples produces have hyphens in them. In future versions, an option to use hex will be available. (hex=true or false)
+    This function takes a mapping file and generates a new file called post_processed_mapping.txt \n
+    The lines from this fie should be pasted into the body of the function map_data() \n
+    This function takes a very specific syntax with the following criteria: \n
+        The mapping file must be a .csv \n
+        The first line must be 's,p,o' \n
+        Every triple in the mapping must be explicitly asserted, with type assertions being done with RDF.type \n
+
     """
 
     
@@ -113,9 +113,10 @@ def process_mapping(mapping_file):
 #Function 2
 
 
-def map_data(instance_data):
+def map_data(instance_data,uuid_or_hex=bool):
     """
-    This function must be updated with the mapping triples produced by the function process_mapping()
+    This function must be updated with the mapping triples produced by the function process_mapping() \n
+    If the uuid_or_hex boolean is False, then the generated triples use uuid.hex, which do not have hyphens in them. \n
     """
     with open(instance_data, 'r') as f:
         reader = csv.DictReader(f)
@@ -123,6 +124,8 @@ def map_data(instance_data):
             
             # Generate UUID for each row
             uuid_str = str(uuid.uuid4())
+            if uuid_or_hex is False:
+                uuid_str = uuid.uuid4().hex
 
             # Add post-processed mapping
             
@@ -137,15 +140,16 @@ def map_data(instance_data):
     # Serialize graph to RDF/XML format
     print(g.serialize(format='ttl'))
 
-def process_and_generate_data(mapping,data):
+def process_and_generate_data(mapping,data,uuid_or_hex=bool):
     """
-    This function generates the proper RDFLib syntax mapping and generates triples using that mapping in one step.
+    This function generates the proper RDFLib syntax mapping and generates triples using that mapping in one step. \n
+    If uuid_or_hex is False, then new triples use hex uuids, which do not have hyphens \n
     """
     #Process mapping
     process_mapping(mapping)
     
     #Map data
-    map_data(data)
+    map_data(data,uuid_or_hex)
 
 #Usage:
 #process_mapping('sample_mapping.csv')
@@ -154,5 +158,5 @@ def process_and_generate_data(mapping,data):
 #map_data('sample_data.csv')
 
 #Or call both at the same time
-process_and_generate_data('sample_mapping.csv','sample_data.csv')
+process_and_generate_data('sample_mapping.csv','sample_data.csv', False)
 

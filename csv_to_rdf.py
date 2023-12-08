@@ -23,12 +23,12 @@ g.bind('owl',owl)
 
 def process_mapping(mapping_file):
     """
-    This function takes a mapping file and generates a new file called post_processed_mapping.txt
-    The lines from this fie should be pasted into the body of the function map_data()
-    This function takes a very specific syntax with the following criteria:
-        The mapping file must be a .csv
-        The first line must be 's,p,o'
-        Every triple in the mapping must be explicitly asserted, with type assertions being done with RDF.type
+    This function takes a mapping file and generates a new file called post_processed_mapping.txt \n
+    The lines from this fie should be pasted into the body of the function map_data() \n
+    This function takes a very specific syntax with the following criteria: \n
+        The mapping file must be a .csv \n
+        The first line must be 's,p,o' \n
+        Every triple in the mapping must be explicitly asserted, with type assertions being done with RDF.type \n
         
     """
 
@@ -115,7 +115,7 @@ def process_mapping(mapping_file):
 
 def map_data(instance_data):
     """
-    This function must be updated with the mapping triples produced by the function process_mapping()
+    This function must be updated with the mapping triples produced by the function process_mapping() \n
     """
     with open(instance_data, 'r') as f:
         reader = csv.DictReader(f)
