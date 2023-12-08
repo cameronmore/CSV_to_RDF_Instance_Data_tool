@@ -29,7 +29,7 @@ def process_mapping(mapping_file):
         The mapping file must be a .csv
         The first line must be 's,p,o'
         Every triple in the mapping must be explicitly asserted, with type assertions being done with RDF.type
-        
+    The triples produces have hyphens in them. In future versions, an option to use hex will be available. (hex=true or false)
     """
 
     
