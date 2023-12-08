@@ -17,7 +17,7 @@ owl = Namespace('http://www.w3.org/2002/07/owl#')
 g.bind('owl',owl)
 
 
-def process_mapping(mapping_file):
+def process_mapping(mapping_file,uuid_or_hex):
     """
     Iterate through the 
         
@@ -37,6 +37,10 @@ def process_mapping(mapping_file):
 
         for row in reader:
             
+            uuid_str = str(uuid.uuid4())
+            if uuid_or_hex is False:
+                uuid_str = uuid.uuid4().hex
+         
             if row['p'] != 'RDF.type' :
                 if 'datapoint' in row['o']:
                     g.add((URIRef(row['s']+uuid_str),RDF.type,Literal(    )   ))
