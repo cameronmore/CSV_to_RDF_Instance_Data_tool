@@ -1,7 +1,8 @@
 import csv, re, os, uuid
 import pandas as pd
 from rdflib import Graph, Literal, RDF, URIRef, Namespace
-from rdflib.namespace import FOAF, XSD, RDFS
+from rdflib.namespace import FOAF, XSD, RDFS, NamespaceManager
+
 
 # Define graph
 g = Graph()
@@ -15,6 +16,8 @@ obo = Namespace('http://purl.obolibrary.org/obo/')
 g.bind('obo',obo)
 owl = Namespace('http://www.w3.org/2002/07/owl#')
 g.bind('owl',owl)
+
+
 
 
 def total_mapping_and_generate_data(mapping_file,data_file,uuid_or_hex):
@@ -32,6 +35,7 @@ def total_mapping_and_generate_data(mapping_file,data_file,uuid_or_hex):
     """
    
     with open(data_file, 'r') as f:
+       
         data_reader = csv.DictReader(f)
         for data_row in data_reader:
             
