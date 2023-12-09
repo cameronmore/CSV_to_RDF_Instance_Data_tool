@@ -1,5 +1,5 @@
 # CSV_to_RDF_Instance_tool
-A tool for turning CSV into RDF with complex mappings. This tool speeds up the process of creating scripts to generate RDF data from CSVs. The burden of learning RDFLib yntax is eased slightly when making a mapping file like those in this directory. While it is important to understand the syntax of RDFLib classes and functions like `URIRef()` and `Literal()`, this script makes it easier to translate graphs into mappings for data.
+A tool for turning CSV into RDF with complex mappings. This tool speeds up the process of creating scripts to generate RDF data from CSVs. The burden of learning RDFLib syntax is eased slightly when making a mapping file like those in this directory. While it is important to understand the syntax of RDFLib classes and functions like `URIRef()` and `Literal()`, this script makes it easier to translate graphs into mappings for data.
 
 # Usage and Syntax
 
