@@ -17,10 +17,14 @@ g.bind('obo',obo)
 owl = Namespace('http://www.w3.org/2002/07/owl#')
 g.bind('owl',owl)
 
+prefixes = {
+    'cco':'http://www.ontologyrepository.com/CommonCoreOntologies/',
+    'obo':'http://purl.obolibrary.org/obo/',
+    'rdfs':'http://www.w3.org/2000/01/rdf-schema#'
+}
 
 
-
-def total_mapping_and_generate_data(mapping_file,data_file,uuid_or_hex):
+def total_mapping_and_generate_data(mapping_file,data_file,uuid_or_hex,prefix_dict=dict):
     """
     Takes a mapping CSV file and data CSV file as input. \n
     This function uses a sligtly different syntax than the other version of this tool, it uses ':' rather than '.' between the prefixes and the identifiers. \n
@@ -40,8 +44,21 @@ def total_mapping_and_generate_data(mapping_file,data_file,uuid_or_hex):
         for data_row in data_reader:
             
 
-            with open(mapping_file, 'r') as input_file:
+            with open(mapping_file, 'r') as input_file:                
                 mapping_reader = csv.DictReader(input_file)
+                
+                
+                #for dict_row in mapping_reader:
+                    #for k, v in dict_row.items():
+
+                        #for k, v in prefix_dict.items():
+                            #dict_row = dict(((key, value.replace(k,v)) for key, value in dict_row.items()))
+
+
+
+                    
+            
+            
                 
                 #Impliment a find-and-replace loop here that replaces prefixes in the triples wit the full IRI prefix
                     #Use *args or *kwargs to let user put their own prefixes in, but hard code a bunch of them like obo and cco especially
@@ -83,6 +100,6 @@ def total_mapping_and_generate_data(mapping_file,data_file,uuid_or_hex):
         print(g.serialize(format="turtle"))
 
 
-total_mapping_and_generate_data('sample_mapping.csv','sample_data.csv',True)
+total_mapping_and_generate_data('sample_mapping.csv','sample_data.csv',True,prefix_dict=prefixes)
 
 #Current error: predefined namespaces are not appearing in the generated triples
