@@ -1,7 +1,6 @@
-import csv, re, os, uuid
-import pandas as pd
+import csv, re, uuid
 from rdflib import Graph, Literal, RDF, URIRef, Namespace
-from rdflib.namespace import FOAF, XSD, RDFS, NamespaceManager
+from rdflib.namespace import XSD, RDFS
 
 
 # Define graph
@@ -33,10 +32,9 @@ def total_mapping_and_generate_data(mapping_file,data_file,uuid_or_hex,prefix_di
     Mapping syntax is a simpler version of regular RDFLib syntax. \n
     If uuid_or_hex is False, then the generated triples are generated without hyphens (as hexidecibles, not uuids). If True or None, then regular random uuids will be used. \n
     Native Python modules csv, re, and uuid must be imported. \n
-    Dependencies: RDFLib, XSD, and RDF must be imported, a grah must be parsed in RDFLib, the function adds triples to this graph, then serializes and prints the generated data to the terminal. \n
-    
-        
+    Dependencies: RDFLib, XSD, and RDF must be imported, a grah must be parsed in RDFLib, the function adds triples to this graph, then serializes and prints the generated data to the terminal. \n  
     """
+    
     #Add full namespace to the mapping file using prefix dictionary
     with open(mapping_file, 'r') as file:
         content = file.read()
@@ -44,7 +42,8 @@ def total_mapping_and_generate_data(mapping_file,data_file,uuid_or_hex,prefix_di
         content = content.replace(key, value)
     with open(mapping_file, 'w') as file:
         file.write(content)
-   
+    
+   #Begin iterating through mapping file and data file
     with open(data_file, 'r') as f:
        
         data_reader = csv.DictReader(f)
@@ -78,7 +77,6 @@ def total_mapping_and_generate_data(mapping_file,data_file,uuid_or_hex,prefix_di
                         #Case 2: Instance to datapoint
                         if 'datapoint' in mapping_row['o']:
                             split_datapoint_list = mapping_row['o'].split('/')
-
                             g.add((URIRef(URIRef(mapping_row['s'])+uuid_str),URIRef(mapping_row['p']),Literal(data_row[split_datapoint_list[2]],datatype=URIRef("http://www.w3.org/2001/XMLSchema#" + split_datapoint_list[1]) )  ))
                         
                         #Case 3: Instance to Instance
@@ -91,7 +89,7 @@ def total_mapping_and_generate_data(mapping_file,data_file,uuid_or_hex,prefix_di
 total_mapping_and_generate_data('sample_mapping.csv','sample_data.csv',True,prefix_dict=prefixes)
 
 
-
+#In the main function, the entire namespace was added to the mapping. Paste this into the function above to undo this.
 def undo_prefix_addition(mapping_file,prefix_dict):
     """
     This function undoes the addition of full namespaces in the total_mapping_and_generate_data() function. \n
