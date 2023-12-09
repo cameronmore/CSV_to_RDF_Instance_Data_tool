@@ -1,0 +1,7 @@
+g.add((URIRef(http://www.ontologyrepository.com/CommonCoreOntologies/Person_1 + uuid_str),RDF:type,URIRef(http://www.ontologyrepository.com/CommonCoreOntologies/Person + uuid_str)))
+g.add((URIRef(http://www.ontologyrepository.com/CommonCoreOntologies/Person_1 + uuid_str),http://www.ontologyrepository.com/CommonCoreOntologies/designated_by,URIRef(http://www.ontologyrepository.com/CommonCoreOntologies/NominalMeasurementInformationContentEntity_1_ + uuid_str)))
+g.add((URIRef(http://www.ontologyrepository.com/CommonCoreOntologies/NominalMeasurementInformationContentEntity_1_ + uuid_str),RDF:type,URIRef(http://www.ontologyrepository.com/CommonCoreOntologies/NominalMeasurementInformationContentEntity + uuid_str)))
+g.add((URIRef(http://www.ontologyrepository.com/CommonCoreOntologies/NominalMeasurementInformationContentEntity_1_ + uuid_str),http://www.ontologyrepository.com/CommonCoreOntologies/has_text_value,Literal(row['Name'], datatype=XSD.string)))
+g.add((URIRef(http://www.ontologyrepository.com/CommonCoreOntologies/Person_1_ + uuid_str),http://www.ontologyrepository.com/CommonCoreOntologies/agent_in,URIRef(http://www.ontologyrepository.com/CommonCoreOntologies/IntentionalAct_1_ + uuid_str)))
+g.add((URIRef(http://www.ontologyrepository.com/CommonCoreOntologies/IntentionalAct_1_ + uuid_str),RDFS:label,Literal(row['Activity'], datatype=XSD.string)))
+g.add((URIRef(http://www.ontologyrepository.com/CommonCoreOntologies/IntentionalAct_1_ + uuid_str),RDF:type,URIRef(http://www.ontologyrepository.com/CommonCoreOntologies/IntentionalAct + uuid_str)))
